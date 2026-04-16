@@ -1,5 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, Download, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import {
+  ArrowRight,
+  Download,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+} from "lucide-react";
 import { motion } from "motion/react";
 import {
   getProfile,
@@ -57,47 +64,76 @@ export default function Hero() {
     [socialLinks]
   );
 
+  const initials = (profile?.full_name || "MH")
+    .split(" ")
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("");
+
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] flex items-center py-20 px-4 sm:px-6 lg:px-8"
+      className="relative min-h-[92vh] flex items-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 35 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65 }}
+            transition={{ duration: 0.7 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-300 text-sm mb-6">
-              <span className="w-2 h-2 rounded-full bg-green-400" />
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-300 text-sm mb-6 shadow-[0_0_20px_rgba(59,130,246,0.12)]"
+            >
+              <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
               <span>{profile?.availability_status || "Open to opportunities"}</span>
-            </div>
+            </motion.div>
 
-            <h1
-              className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl leading-tight mb-5"
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl leading-[0.95] mb-6"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              <span className="block text-white/90">Hi, I’m</span>
+              <span className="block text-white/90 mb-2">Hi, I’m</span>
               <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500 bg-clip-text text-transparent">
                 {profile?.full_name || "Mahmudul Hasan Hasib"}
               </span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-white/80 mb-5 leading-relaxed max-w-3xl">
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.22 }}
+              className="text-lg sm:text-xl md:text-2xl text-white/80 mb-5 leading-relaxed max-w-3xl"
+            >
               {profile?.headline ||
                 "Python Developer · Backend & ML Engineer · Full-Stack Developer"}
-            </p>
+            </motion.p>
 
-            <p className="text-white/65 text-base sm:text-lg leading-relaxed max-w-3xl mb-8">
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-white/65 text-base sm:text-lg leading-relaxed max-w-3xl mb-8"
+            >
               {profile?.short_intro ||
                 "I build scalable backend systems, intelligent ML-powered solutions, and modern full-stack web applications with a strong focus on clean architecture and real-world usability."}
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap items-center gap-4 mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.38 }}
+              className="flex flex-wrap items-center gap-4 mb-8"
+            >
               <button
                 onClick={() => scrollToSection("contact")}
-                className="inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:shadow-[0_0_24px_rgba(59,130,246,0.35)] transition-all duration-300"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full hover:shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.02] transition-all duration-300"
               >
                 <span>Let’s Talk</span>
                 <ArrowRight size={18} />
@@ -108,7 +144,7 @@ export default function Hero() {
                   href={resume.file}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 hover:border-blue-500/30 hover:scale-[1.02] transition-all duration-300"
                 >
                   <Download size={18} />
                   <span>Download CV</span>
@@ -122,9 +158,14 @@ export default function Hero() {
                   <span>CV Unavailable</span>
                 </button>
               )}
-            </div>
+            </motion.div>
 
-            <div className="flex flex-wrap items-center gap-3 mb-6">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.46 }}
+              className="flex flex-wrap items-center gap-3 mb-6"
+            >
               {orderedSocialLinks.length > 0 ? (
                 orderedSocialLinks.map((link) => (
                   <a
@@ -133,7 +174,7 @@ export default function Hero() {
                     target={link.url.startsWith("mailto:") ? undefined : "_blank"}
                     rel={link.url.startsWith("mailto:") ? undefined : "noreferrer"}
                     aria-label={link.name}
-                    className="w-11 h-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/75 hover:text-blue-400 hover:border-blue-500/40 hover:bg-white/10 transition-all duration-300"
+                    className="w-11 h-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/75 hover:text-blue-400 hover:border-blue-500/40 hover:bg-white/10 hover:scale-110 transition-all duration-300"
                   >
                     {getSocialIcon(link.platform, link.name)}
                   </a>
@@ -142,7 +183,7 @@ export default function Hero() {
                 <>
                   <a
                     href="mailto:mahmudulhasanhasib443@gmail.com"
-                    className="w-11 h-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/75 hover:text-blue-400 hover:border-blue-500/40 hover:bg-white/10 transition-all duration-300"
+                    className="w-11 h-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/75 hover:text-blue-400 hover:border-blue-500/40 hover:bg-white/10 hover:scale-110 transition-all duration-300"
                   >
                     <Mail size={18} />
                   </a>
@@ -150,7 +191,7 @@ export default function Hero() {
                     href="https://github.com/mahmudul-hasan-hasib"
                     target="_blank"
                     rel="noreferrer"
-                    className="w-11 h-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/75 hover:text-blue-400 hover:border-blue-500/40 hover:bg-white/10 transition-all duration-300"
+                    className="w-11 h-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/75 hover:text-blue-400 hover:border-blue-500/40 hover:bg-white/10 hover:scale-110 transition-all duration-300"
                   >
                     <Github size={18} />
                   </a>
@@ -158,32 +199,52 @@ export default function Hero() {
                     href="https://www.linkedin.com/in/mahmudul-hasan-hasib-40b102261/"
                     target="_blank"
                     rel="noreferrer"
-                    className="w-11 h-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/75 hover:text-blue-400 hover:border-blue-500/40 hover:bg-white/10 transition-all duration-300"
+                    className="w-11 h-11 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/75 hover:text-blue-400 hover:border-blue-500/40 hover:bg-white/10 hover:scale-110 transition-all duration-300"
                   >
                     <Linkedin size={18} />
                   </a>
                 </>
               )}
-            </div>
+            </motion.div>
 
             {profile?.location && (
-              <div className="inline-flex items-center gap-2 text-white/50 text-sm sm:text-base">
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.54 }}
+                className="inline-flex items-center gap-2 text-white/50 text-sm sm:text-base"
+              >
                 <MapPin size={16} />
                 <span>{profile.location}</span>
-              </div>
+              </motion.div>
             )}
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.65, delay: 0.08 }}
+            initial={{ opacity: 0, scale: 0.88, rotate: -3 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, delay: 0.18 }}
             className="flex justify-center lg:justify-end"
           >
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/30 to-purple-600/30 blur-3xl rounded-full" />
+              <motion.div
+                animate={{
+                  scale: [1, 1.04, 1],
+                  opacity: [0.35, 0.55, 0.35],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute -inset-8 bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-blue-600/20 blur-3xl rounded-[3rem]"
+              />
 
-              <div className="relative w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[360px] md:h-[360px] rounded-[2rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_0_45px_rgba(59,130,246,0.12)]">
+              <motion.div
+                whileHover={{ y: -6, scale: 1.02 }}
+                transition={{ duration: 0.35 }}
+                className="relative w-[260px] h-[320px] sm:w-[320px] sm:h-[400px] md:w-[360px] md:h-[450px] rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_0_45px_rgba(59,130,246,0.15)]"
+              >
                 {loading ? (
                   <div className="w-full h-full animate-pulse bg-white/10" />
                 ) : profile?.profile_image ? (
@@ -193,15 +254,15 @@ export default function Hero() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-600/20 to-purple-600/20 text-6xl sm:text-7xl font-bold text-white/30">
-                    {(profile?.full_name || "MH")
-                      .split(" ")
-                      .map((part) => part[0])
-                      .slice(0, 2)
-                      .join("")}
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-blue-500/15">
+                    <div className="text-7xl sm:text-8xl font-bold text-white/20 select-none">
+                      {initials}
+                    </div>
                   </div>
                 )}
-              </div>
+
+                <div className="absolute inset-0 rounded-[2.5rem] ring-1 ring-white/10 pointer-events-none" />
+              </motion.div>
             </div>
           </motion.div>
         </div>
