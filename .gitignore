@@ -1,0 +1,52 @@
+# ========================
+# Node / Frontend
+# ========================
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+
+# ========================
+# Django / Backend
+# ========================
+backend/config/__pycache__/
+backend/config/*.pyc
+backend/config/db.sqlite3
+
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Virtual env
+venv/
+.env/
+.venv/
+
+# Django static/media
+staticfiles/
+media/
+
+# ========================
+# VS Code / IDE
+# ========================
+.vscode/
+.idea/
+
+# ========================
+# OS files
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Logs
+# ========================
+*.log
+
+# ========================
+# Misc
+# ========================
+duplicates.txt
