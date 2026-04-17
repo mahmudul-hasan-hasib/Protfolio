@@ -269,7 +269,7 @@ export default function Hero() {
                     <img
                       src={profile.profile_image}
                       alt={profile.full_name}
-                      className="w-full h-full object-cover object-center"
+                      className="w-full h-full object-cover object-[50%_30%]"
                     />
                   ) : (
                     <div className="w-full h-full rounded-full flex items-center justify-center bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-cyan-500/15">
