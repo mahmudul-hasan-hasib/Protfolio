@@ -17,7 +17,6 @@ from resume.views import ActiveResumeAPIView
 from social.views import SocialLinkListAPIView
 from github.views import GitHubStatsAPIView
 
-
 urlpatterns = [
     path("admin/", admin.site.urls),
 
@@ -36,5 +35,4 @@ urlpatterns = [
     path("api/github/", GitHubStatsAPIView.as_view(), name="api-github"),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -77,6 +77,7 @@ export default function Hero() {
     >
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
+          {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -220,48 +221,67 @@ export default function Hero() {
             )}
           </motion.div>
 
+          {/* Right Image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.88, rotate: -3 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            initial={{ opacity: 0, scale: 0.88 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.18 }}
             className="flex justify-center lg:justify-end"
           >
             <div className="relative">
+              {/* Outer animated glow */}
               <motion.div
                 animate={{
-                  scale: [1, 1.04, 1],
-                  opacity: [0.35, 0.55, 0.35],
+                  scale: [1, 1.08, 1],
+                  opacity: [0.28, 0.5, 0.28],
                 }}
                 transition={{
-                  duration: 5,
+                  duration: 4.5,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="absolute -inset-8 bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-blue-600/20 blur-3xl rounded-[3rem]"
+                className="absolute -inset-8 rounded-full bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-cyan-500/20 blur-3xl"
               />
 
+              {/* Floating circle wrapper */}
               <motion.div
-                whileHover={{ y: -6, scale: 1.02 }}
-                transition={{ duration: 0.35 }}
-                className="relative w-[260px] h-[320px] sm:w-[320px] sm:h-[400px] md:w-[360px] md:h-[450px] rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_0_45px_rgba(59,130,246,0.15)]"
+                animate={{
+                  y: [0, -12, 0],
+                }}
+                transition={{
+                  duration: 3.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative"
               >
-                {loading ? (
-                  <div className="w-full h-full animate-pulse bg-white/10" />
-                ) : profile?.profile_image ? (
-                  <img
-                    src={profile.profile_image}
-                    alt={profile.full_name}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-blue-500/15">
-                    <div className="text-7xl sm:text-8xl font-bold text-white/20 select-none">
-                      {initials}
-                    </div>
-                  </div>
-                )}
+                {/* Border glow */}
+                <div className="absolute -inset-3 rounded-full bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-cyan-400/30 blur-xl" />
 
-                <div className="absolute inset-0 rounded-[2.5rem] ring-1 ring-white/10 pointer-events-none" />
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[370px] md:h-[370px] rounded-full overflow-hidden border border-white/15 bg-white/5 backdrop-blur-md shadow-[0_0_45px_rgba(59,130,246,0.18)]"
+                >
+                  {loading ? (
+                    <div className="w-full h-full rounded-full animate-pulse bg-white/10" />
+                  ) : profile?.profile_image ? (
+                    <img
+                      src={profile.profile_image}
+                      alt={profile.full_name}
+                      className="w-full h-full object-cover object-center"
+                    />
+                  ) : (
+                    <div className="w-full h-full rounded-full flex items-center justify-center bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-cyan-500/15">
+                      <span className="text-7xl sm:text-8xl font-bold text-white/20 select-none">
+                        {initials}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-t from-[#050014]/15 via-transparent to-white/5 pointer-events-none" />
+                  <div className="absolute inset-0 rounded-full ring-1 ring-white/10 pointer-events-none" />
+                </motion.div>
               </motion.div>
             </div>
           </motion.div>
