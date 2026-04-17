@@ -1,7 +1,7 @@
 from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+from django.views.static import serve
 
 from accounts.views import ProfileAPIView, media_debug
 from projects.views import (
@@ -21,6 +21,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     path("api/profile/", ProfileAPIView.as_view(), name="api-profile"),
+    path("api/media-debug/", media_debug, name="api-media-debug"),
 
     path("api/projects/", ProjectListAPIView.as_view(), name="api-projects"),
     path("api/projects/featured/", FeaturedProjectListAPIView.as_view(), name="api-featured-projects"),
@@ -33,7 +34,6 @@ urlpatterns = [
     path("api/resume/", ActiveResumeAPIView.as_view(), name="api-resume"),
     path("api/social-links/", SocialLinkListAPIView.as_view(), name="api-social-links"),
     path("api/github/", GitHubStatsAPIView.as_view(), name="api-github"),
-    path("api/media-debug/", media_debug, name="api-media-debug"),
-]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
+]
