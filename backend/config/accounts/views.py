@@ -14,3 +14,15 @@ class ProfileAPIView(APIView):
 
         serializer = ProfileSerializer(profile, context={"request": request})
         return Response(serializer.data)
+from django.conf import settings
+from django.http import JsonResponse
+import os
+def media_debug(request):
+    test_path = settings.MEDIA_ROOT / "profile" / "profile.png"
+
+    return JsonResponse({
+        "media_url": settings.MEDIA_URL,
+        "media_root": str(settings.MEDIA_ROOT),
+        "test_file_path": str(test_path),
+        "file_exists": os.path.exists(test_path),
+    })
